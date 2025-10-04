@@ -1,11 +1,11 @@
-import Admin from "../app/modules/auth/admin.model";
+import User from "../app/modules/user/user.model";
 import { envVars } from "../config/envConfig";
 import bcrypt from "bcryptjs";
 
 export const seedSuperAdmin = async () => {
   try {
     // Check if super admin already exists
-    const isSuperAdminExist = await Admin.findOne({ email: envVars.SUPER_ADMIN_EMAIL });
+    const isSuperAdminExist = await User.findOne({ email: envVars.SUPER_ADMIN_EMAIL });
     if (isSuperAdminExist) {
       console.log("Super Admin Already Exists");
       return;
@@ -21,8 +21,8 @@ export const seedSuperAdmin = async () => {
     };
 
     // Save super admin
-    const superAdmin = await Admin.create(payload);
-    console.log("Super Admin Created:", superAdmin.email);
+    const Admin = await User.create(payload);
+    console.log("Super Admin Created:", Admin.email);
 
   } catch (error) {
     console.log("Error seeding super admin:", error);
