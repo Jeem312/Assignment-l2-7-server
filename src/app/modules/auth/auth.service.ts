@@ -22,17 +22,18 @@ export const loginService = async (email: string, password: string) => {
   }
 
   // Generate JWT tokens
-  const accessToken = generateToken(
-    { userId: user._id, email: user.email, role: user.role },
-    envVars.JWT_SECRET,
-    Number(envVars.JWT_ACCESS_EXPIRES)
-  );
+const accessToken = generateToken(
+  { userId: user._id, email: user.email, role: user.role },
+  envVars.JWT_SECRET,
+  envVars.JWT_ACCESS_EXPIRES // string like "9d"
+);
 
-  const refreshToken = generateToken(
-    { userId: user._id, email: user.email, role: user.role },
-    envVars.JWT_REFRESH_SECRET,
-    Number(envVars.JWT_REFRESH_SECRET_EXPIRED)
-  );
+const refreshToken = generateToken(
+  { userId: user._id, email: user.email, role: user.role },
+  envVars.JWT_REFRESH_SECRET,
+  envVars.JWT_REFRESH_SECRET_EXPIRED 
+);
+
 
   return {
     user: {
@@ -67,7 +68,7 @@ export const refreshTokenService = async (refreshToken: string) => {
     const newAccessToken = generateToken(
       { userId: user._id, email: user.email, role: user.role },
       envVars.JWT_SECRET,
-      Number(envVars.JWT_ACCESS_EXPIRES)
+      envVars.JWT_ACCESS_EXPIRES // string like "9d"
     );
 
     return { accessToken: newAccessToken };

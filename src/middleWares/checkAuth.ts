@@ -4,6 +4,7 @@ import { verifyToken } from "../utils/jwt";
 import httpStatus from "http-status-codes"
 import AppError from "../helpers/AppError";
 import User from "../app/modules/user/user.model";
+import { envVars } from "../config/envConfig";
 
 
 export const checkAuth = (...authRoles:string[])=>  async(req:Request,res:Response,next:NextFunction)=>{
@@ -13,7 +14,7 @@ export const checkAuth = (...authRoles:string[])=>  async(req:Request,res:Respon
             if (!accessToken){
                 throw new AppError(403,"NO Token Received")
             }
-            const verifiedToken =verifyToken(accessToken)as JwtPayload
+            const verifiedToken =verifyToken(accessToken,envVars.JWT_SECRET)as JwtPayload
 
               const isUserExist = await User.findOne(({email:verifiedToken.email}))
 
