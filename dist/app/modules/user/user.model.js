@@ -34,9 +34,13 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const AdminSchema = new mongoose_1.Schema({
+const UserSchema = new mongoose_1.Schema({
+    name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
 }, { timestamps: true });
-const Admin = mongoose_1.default.model("Admin", AdminSchema);
-exports.default = Admin;
+const User = mongoose_1.default.model("User", UserSchema);
+exports.default = User;

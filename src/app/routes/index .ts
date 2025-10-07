@@ -2,6 +2,7 @@ import { Router } from "express"
 import { ProjectRouter } from "../modules/projects/project.route"
 import { BlogRoutes } from "../modules/blog/blog.route"
 import { UserRoutes } from "../modules/user/user.route"
+import { AuthRoutes } from "../modules/auth/auth.route"
 
 export const router = Router()
 
@@ -17,7 +18,12 @@ const moduleRoutes = [
     {
         path: "/blogs",
         route: BlogRoutes
+    },
+    {
+        path: "/auth",
+        route: AuthRoutes
     }
+    
 ]
 
 moduleRoutes.forEach((route) => {

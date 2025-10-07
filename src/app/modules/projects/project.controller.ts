@@ -23,3 +23,7 @@ export const deleteProject = catchAsync(async (req: Request, res: Response) => {
   await projectServices.deleteProject(req.params.id);
   SendResponse(res, { statusCode: 200, success: true, message: "Project deleted", data: null });
 });
+export const singleProject = catchAsync(async (req: Request, res: Response) => {
+  const project = await projectServices.singleProject(req.params.id);
+  SendResponse(res, { statusCode: 200, success: true, message: "Project fetched", data: project });
+});

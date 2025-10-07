@@ -4,7 +4,8 @@ import { catchAsync } from "../../../utils/catchAsync";
 import { createUserService } from "./user.service";
 
 export const createUserController = catchAsync(async (req: Request, res: Response) => {
-  const user = await createUserService(req.body);
+  const data = req.body;
+  const user = await createUserService(data);
 
   sendResponse(res, {
     statusCode: 201,
