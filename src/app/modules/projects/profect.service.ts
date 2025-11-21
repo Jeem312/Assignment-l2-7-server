@@ -20,4 +20,8 @@ import { IProject } from "./project.interface";
     await Project.findByIdAndDelete(id);
     return { message: "Project deleted successfully" };
 };
-export const projectServices = { createProject, getAllProjects, updateProject, deleteProject };
+const singleProject = async (id: string) => {
+    const project = await Project.findById(id);
+    return project;
+};
+export const projectServices = { createProject, getAllProjects, updateProject, deleteProject, singleProject };
